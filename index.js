@@ -81,7 +81,7 @@ app.use((req, res, next) => {
 })
 
 app.get("/", (req, res) => {
-  throw new ExpressError(404, "Page not found!");
+  res.redirect("/listings");
 })
 
 // Listings

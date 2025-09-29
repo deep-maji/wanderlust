@@ -4,7 +4,11 @@ const { geocoding, config  } = require("@maptiler/client");
 config.apiKey = process.env.MAPTILER_API_KEY;
 
 module.exports.index = async (req, res) => {
+  let {filter} = req.query;
   let listings = await Listing.find();
+  if (filter) {
+    listings = listings.filter(listing => listing.category === filter);
+  }
   res.render("./listings/index", { listings });
 };
 
@@ -16,7 +20,7 @@ module.exports.createNewListing = async (req, res, next) => {
   const result = await geocoding.forward(req.body.listing.location, {
     limit : 1
   });
-
+  console.log(req.body.listing);
   let url = req.file.path;
   let filename = req.file.filename;
   const newListing = new Listing(req.body.listing);

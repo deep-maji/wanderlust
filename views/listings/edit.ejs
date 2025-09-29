@@ -28,6 +28,19 @@
             <input type="file" id="image" class="form-control" name="listing[image]" placeholder="Enter image Url">
           </div>
 
+          <div class="mb-3">
+            <label for="category" class="form-label">Select category: </label>
+            <select class="form-select" required id="category" name="listing[category]">
+              <option value="">Open this select menu</option>
+              <option value="iconicCities" <%= listing.category === 'iconicCities' ? "selected" : "" %>>Iconic Cities</option>
+              <option value="mountains" <%= listing.category === 'mountains' ? "selected" : "" %>>Mountains</option>
+              <option value="amazingPools" <%= listing.category === 'amazingPools' ? "selected" : "" %>>Amazing Pools</option>
+              <option value="camping" <%= listing.category === 'camping' ? "selected" : "" %>>Camping</option>
+              <option value="arctic" <%= listing.category === 'arctic' ? "selected" : "" %>>Arctic</option>
+              <option value="farms" <%= listing.category === 'farms' ? "selected" : "" %>>Farms</option>
+            </select>
+          </div>
+
           <div class="row mb-3">
             <div class="col-md-4">
               <label for="price" class="form-label">Price: </label>

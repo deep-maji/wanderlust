@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Reviews = require("./reviews");
 const { coordinates } = require("@maptiler/client");
+const { string } = require("joi");
 const Schema = mongoose.Schema;
 
 const listingSchema = new Schema({
@@ -48,6 +49,11 @@ const listingSchema = new Schema({
       type : [Number],
       required: true
     }
+  },
+  category : {
+    type : String,
+    enum: ['trending', 'iconicCities', 'mountains', 'castles', 'amazingPools', 'camping', 'farms', 'arctic'],
+    required: true
   }
 });
 

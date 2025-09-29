@@ -8,8 +8,9 @@
   }
 
   #filter-options {
+    width: 100%;
     display: flex;
-    overflow-x: auto;
+    overflow-x: scroll;
   }
 
   #filter-options::-webkit-scrollbar {
@@ -47,46 +48,77 @@
     text-wrap: nowrap;
     margin-left: 1rem;
   }
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+
+  @media (max-width:764px) {
+    #filters { 
+      flex-direction: column;
+      width: 100%;
+    }
+
+    #tax-toggel {
+      margin-bottom: 1rem;
+    }
+
+  }
 </style>
 
 
 <div id="filters">
   <div id="filter-options">
+    <!-- <div class="filter">
+      <a href="/listings?filter=trending">
+        <div><i class="fa-solid fa-fire"></i></div>
+        <p>Trending</p>
+      </a>
+    </div> -->
     <div class="filter">
-      <div><i class="fa-solid fa-fire"></i></div>
-      <p>Trending</p>
+      <a href="/listings?filter=iconicCities">
+        <div><i class="fa-solid fa-mountain-city"></i></i></div>
+        <p>Iconic Cities</p>
+      </a>
     </div>
     <div class="filter">
-      <div><i class="fa-solid fa-bed"></i></div>
-      <p>Trending</p>
+      <a href="/listings?filter=mountains">
+        <div><i class="fa-solid fa-mountain"></i></div>
+        <p>Mountains</p>
+      </a>
     </div>
     <div class="filter">
-      <div><i class="fa-solid fa-mountain-city"></i></i></div>
-      <p>Iconic Cities</p>
+      <a href="/listings?filter=castles">
+        <div><i class="fa-solid fa-chess-rook"></i></div>
+        <p>Castles</p>
+      </a>
     </div>
     <div class="filter">
-      <div><i class="fa-solid fa-mountain"></i></div>
-      <p>Mountains</p>
+      <a href="/listings?filter=amazingPools">
+        <div><i class="fa-solid fa-person-swimming"></i></div>
+        <p>Amazing Pools</p>
+      </a>
     </div>
     <div class="filter">
-      <div><i class="fa-solid fa-chess-rook"></i></div>
-      <p>Castles</p>
+      <a href="/listings?filter=camping">
+        <div><i class="fa-solid fa-tree"></i></div>
+        <p>Camping</p>
+      </a>
     </div>
     <div class="filter">
-      <div><i class="fa-solid fa-person-swimming"></i></div>
-      <p>Amazing Pools</p>
+      <a href="/listings?filter=farms">
+        <div><i class="fa-solid fa-cow"></i></div>
+        <p>Farms</p>
+      </a>
     </div>
     <div class="filter">
-      <div><i class="fa-solid fa-tree"></i></div>
-      <p>Camping</p>
-    </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-cow"></i></div>
-      <p>Farms</p>
-    </div>
-    <div class="filter">
-      <div><i class="fa-solid fa-snowflake"></i></div>
-      <p>Arctic</p>
+      <div>
+        <a href="/listings?filter=arctic">
+          <i class="fa-solid fa-snowflake"></i>
+          <p>Arctic</p>
+        </a>
+      </div>
     </div>
   </div>
 
@@ -100,17 +132,22 @@
   <body>
 
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1">
-      <% for (let listing of listings) { %>
-        <a href="/listings/<%= listing._id  %>" class="listing-link">
-          <div class="card col listing-card">
-            <img src="<%= listing.image.url %>" class="card-img-top" alt="..." style="height: 20rem;">
-            <div class="card-img-overlay"><%= listing.description %></div>
-            <div class="card-body">
-              <p class="card-text"><b><%= listing.title %></b> <br> &#8377; <%= listing.price.toLocaleString("en-IN") %> / night <i class="tax-info"> &nbsp; &nbsp;+18% taxs</i></p>
+      <% if (listings.length !== 0) { %>
+        <% for (let listing of listings) { %>
+          <a href="/listings/<%= listing._id  %>" class="listing-link">
+            <div class="card col listing-card">
+              <img src="<%= listing.image.url %>" class="card-img-top" alt="..." style="height: 20rem;">
+              <div class="card-img-overlay"><%= listing.description %></div>
+              <div class="card-body">
+                <p class="card-text"><b><%= listing.title %></b> <br> &#8377; <%= listing.price.toLocaleString("en-IN") %> / night <i class="tax-info"> &nbsp; &nbsp;+18% taxs</i></p>
+              </div>
             </div>
-          </div>
-        </a>
+          </a>
+        <% } %>
+      <% } else { %>
+          <p>No result found!</p>
       <% } %>
+
     </div>
   </body>
 
